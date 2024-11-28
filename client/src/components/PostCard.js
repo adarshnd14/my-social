@@ -2,6 +2,7 @@ import {
   Button,
   Card,
   IconButton,
+  Input,
   Stack,
   Typography,
   useTheme,
@@ -105,11 +106,6 @@ const PostCard = (props) => {
               padding: theme.spacing(1),
             }}
           >
-            {/* <LikeBox
-              likeCount={likeCount}
-              liked={post.liked}
-              onLike={handleLike}
-            /> */}
           </Stack>
           <PostContentBox clickable={preview} post={post} editing={editing}>
             <HorizontalStack justifyContent="space-between">
