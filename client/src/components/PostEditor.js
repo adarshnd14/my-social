@@ -1,7 +1,7 @@
 import {
   Button,
   Card,
-  Link,
+  Input,
   Stack,
   TextField,
   Typography,
@@ -18,6 +18,7 @@ import UserAvatar from "./UserAvatar";
 const PostEditor = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [fileError, setFileError] = useState("");
 
   const [formData, setFormData] = useState({
     title: "",
@@ -53,6 +54,17 @@ const PostEditor = () => {
     return errors;
   };
 
+  const handleFile = (e) => {
+    const validFileTypes = ['image/jpg', 'image/jpeg', 'image/png'];
+    const file = e.target.files[0];
+    console.log();
+    if (!validFileTypes.find(type => type === file.type)) {
+      setFileError("File must be in JPG/PNG format")
+    } else {
+      setFileError("");
+    }
+  }
+
   return (
     <Card>
       <Stack spacing={1}>
@@ -65,13 +77,12 @@ const PostEditor = () => {
           </HorizontalStack>
         )}
 
-        <Typography>
-          <a href="https://commonmark.org/help/" target="_blank">
-            Markdown Help
-          </a>
-        </Typography>
-
         <Box component="form" onSubmit={handleSubmit}>
+          <label for="image">Photo</label><br />
+          <Input id="image" type="file" onChange={handleFile} />
+          {fileError && <p style={{
+            color: "red"
+          }}>*{fileError}</p>}
           <TextField
             fullWidth
             label="Title"
